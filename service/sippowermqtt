@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# PROVIDE: sippowermqtt
+# REQUIRE: LOGIN NETWORKING rabbitmq
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="sippowermqtt"
+desc="Publish SIP POWER estimated pressure readings to MQTT"
+rcvar="sippowermqtt_enable"
+
+load_rc_config "$name"
+: ${sippowermqtt_enable:="NO"}
+: ${sippowermqtt_run_user:="nobody"}
+: ${sippowermqtt_config:="/usr/local/etc/sippowermqtt.conf"}
+: ${sippowermqtt_python:="/usr/local/bin/python3"}
+: ${sippowermqtt_pythonpath:=""}
+: ${sippowermqtt_pidfile:="/var/run/sippowermqtt.pid"}
+
+pidfile="${sippowermqtt_pidfile}"
+procname="/usr/sbin/daemon"
+command="/usr/sbin/daemon"
+required_files="${sippowermqtt_config}"
+
+if [ -n "${sippowermqtt_pythonpath}" ]; then
+    command_args="-c -f -P ${pidfile} -R 5 -S -T ${name} -u ${sippowermqtt_run_user} /usr/bin/env PYTHONPATH=${sippowermqtt_pythonpath} ${sippowermqtt_python} -m saessippower.mqttdaemon --config ${sippowermqtt_config}"
+else
+    command_args="-c -f -P ${pidfile} -R 5 -S -T ${name} -u ${sippowermqtt_run_user} ${sippowermqtt_python} -m saessippower.mqttdaemon --config ${sippowermqtt_config}"
+fi
+
+run_rc_command "$1"

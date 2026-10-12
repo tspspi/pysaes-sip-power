@@ -1,0 +1,17 @@
+{
+  "mqtt_host": "broker.example.org",
+  "mqtt_port": 1883,
+  "mqtt_user": "replace-with-publisher-user",
+  "mqtt_password": "replace-with-publisher-password",
+  "gauge": "sippower",
+  "gauge_name": "saes-ion-pump",
+  "device_host": "10.0.0.10",
+  "modbus_port": 502,
+  "modbus_unit": 11,
+  "channel": 1,
+  "timeout_seconds": 2.0,
+  "base_topic": "/example/site",
+  "pressure_topic": "/example/site/status/pressure/saes-ion-pump",
+  "status_topic": "/example/site/status/ionpump/saes-ion-pump",
+  "interval_seconds": 10
+}
