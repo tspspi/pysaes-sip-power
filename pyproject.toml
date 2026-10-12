@@ -10,7 +10,7 @@ authors = [{name = "Thomas Spielauer", email = "pypipackages01@tspi.at"}]
 readme = "README.md"
 license = {text = "BSD-3-Clause"}
 requires-python = ">=3.8"
-dependencies = ["pylabdevs-tspspi>=0.0.18", "pyserial>=3.5", "paho-mqtt>=2.0"]
+dependencies = ["pylabdevs-tspspi>=0.0.19", "pyserial>=3.5", "paho-mqtt>=2.0"]
 
 [project.scripts]
 sippowermqtt = "saessippower.mqttdaemon:main"
