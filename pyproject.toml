@@ -1,19 +1,22 @@
 [build-system]
-requires = ["setuptools>=61", "wheel"]
+requires = ["setuptools>=61", "wheel", "setuptools-git-versioning"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "pysaes-sip-power-tspspi"
-version = "0.0.1"
+dynamic = ["version"]
 description = "SAES SIP POWER ion pump and pressure gauge Modbus driver with MQTT publisher (unofficial)"
 authors = [{name = "Thomas Spielauer", email = "pypipackages01@tspi.at"}]
 readme = "README.md"
 license = {text = "BSD-3-Clause"}
 requires-python = ">=3.8"
-dependencies = ["pylabdevs-tspspi", "pyserial>=3.5", "paho-mqtt>=2.0"]
+dependencies = ["pylabdevs-tspspi>=0.0.18", "pyserial>=3.5", "paho-mqtt>=2.0"]
 
 [project.scripts]
 sippowermqtt = "saessippower.mqttdaemon:main"
+
+[tool.setuptools-git-versioning]
+enabled = true
 
 [tool.setuptools]
 package-dir = {"" = "src"}
